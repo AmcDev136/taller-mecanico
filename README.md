@@ -115,4 +115,4 @@ Al ser un sitio estático, se puede publicar gratis en Cloudflare Pages, Netlify
 ## Licencia
 
 Proyecto personal de portafolio.
-El código se distribuye bajo la licencia [MIT](LICENSE). Las fotografías pertenecen a sus autores y se usan según las licencias de Unsplash o Pexels.
+El código se distribuye bajo la licencia [MIT](LICENSE). Las fotografías pertenecen a sus autores y se usan según las licencias de Pexels.
