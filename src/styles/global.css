@@ -1,0 +1,28 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+
+@theme {
+    --color-crema: #f6efe3;
+    --color-arena: #e8dcc4;
+    --color-naranja: #c2410c;
+    --color-naranja-oscuro: #9a3412;
+    --color-naranja-vivo: #f97316;
+    --color-carbon: #2b2622;
+
+    --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    section[id] {
+        scroll-margin-top: 4rem;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-naranja);
+        outline-offset: 3px;
+    }
+}

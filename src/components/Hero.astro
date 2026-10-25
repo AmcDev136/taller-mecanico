@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import { site, whatsappLink } from "../data/site";
+
+const modulos = import.meta.glob<{ default: ImageMetadata }>(
+    "../assets/hero/*.{jpg,jpeg,png,webp}",
+    { eager: true }
+);
+
+const fotos = Object.entries(modulos)
+    .sort(([a], [b]) => a.localeCompare(b, "es", { numeric: true }))
+    .map(([, m]) => m.default);
+---
+
+<section id="inicio" class="relative isolate flex min-h-[85svh] items-center overflow-hidden bg-carbon text-crema">
+    <div class="absolute inset-0 -z-20" aria-hidden="true">
+        {fotos.map((foto, i) => (
+            <div class="slide absolute inset-0" style={`--i:${i}`}>
+                <Image
+                    src={foto} alt=""
+                    widths={[480, 768, 1200, 1600]}
+                    sizes="100vw"
+                    quality={65}
+                    loading={i === 0 ? "eager" : "lazy"}
+                    fetchpriority={i === 0 ? "high" : "auto"}
+                    class="h-full w-full object-cover"
+                />
+            </div>
+        ))}
+    </div>
+
+    <div class="absolute inset-0 -z-10 bg-linear-to-b from-carbon/70 via-carbon/55 to-carbon/85" aria-hidden="true"></div>
+
+    <div class="mx-auto w-full max-w-5xl px-4 py-24 text-center sm:py-32">
+        <h1 class="text-balance text-4xl font-bold leading-tight sm:text-6xl">
+            Tu auto en manos de <span class="text-naranja-vivo">expertos</span>
+        </h1>
+        <p class="mx-auto mt-5 max-w-xl text-pretty text-lg text-crema/85">{site.description}</p>
+
+        <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a 
+                href={whatsappLink("Hola, quiero agendar una cita para mi auto")}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full rounded-lg bg-naranja px-8 py-4 text-lg font-semibold text-white transition hover:bg-naranja-oscuro sm:w-auto"
+            >
+                Agendar por WhatsApp
+            </a>
+            <a 
+                href="#servicios"
+                class="w-full rounded-lg border-2 border-crema/40 px-8 py-4 text-lg font-semibold transition hover:border-naranja-vivo hover:text-naranja-vivo sm:w-auto"
+            >
+                Ver servicios
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .slide {
+        opacity: 1;
+        animation: carrusel 30s linear infinite;
+        animation-delay: calc(var(--i) * 6s - 1.2s);
+    }
+
+    @keyframes carrusel {
+        0%      { opacity: 0; transform: scale(1); }
+        4%      { opacity: 1; }
+        20%     { opacity: 1; }
+        24%     { opacity: 0; transform: scale(1.08); }
+        100%    { opacity: 0; transform: scale(1.08); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .slide { animation: none; }
+        .slide:first-child { opacity: 1; }
+    }
+</style>

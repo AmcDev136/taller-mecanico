@@ -1,0 +1,44 @@
+---
+import { Info } from "@lucide/astro";
+import { site } from "../data/site";
+---
+<section id="ubicacion" class="mx-auto max-w-5xl px-4 py-20">
+    <h2 class="text-center text-3xl font-bold">Visítanos</h2>
+
+    <p
+        role="note"
+        class="mx-auto mt-6 flex max-w-2xl items-start gap-3 rounded-lg border border-naranja/40 bg-arena/60 px-4 py-3 text-sm"
+    >
+        <Info size={18} class="mt-0.5 shrink-0 text-naranja" aria-hidden="true" />
+        <span>{site.avisoDemo}</span>
+    </p>
+
+    <div class="mt-10 grid gap-8 md:grid-cols-2">
+        <div class="space-y-6">
+            <div>
+                <h3 class="font-semibold text-naranja">Dirección (ejemplo)</h3>
+                <p class="mt-1">{site.address}</p>
+            </div>
+            <div>
+                <h3 class="font-semibold text-naranja">Horarios (ejemplo)</h3>
+                <ul class="mt-2 divide-y divide-arena">
+                    {site.horarios.map((h) => (
+                        <li class="flex justify-between py-2">
+                            <span>{h.dia}</span>
+                            <span class="font-medium">{h.horas}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+
+        <iframe
+        src={site.mapEmbed}
+        title="Mapa de ejemplo, no es la ubicación de un taller real"
+        class="h-full min-h-72 w-full rounded-xl border border-arena"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+        ></iframe>
+    </div>
+</section>

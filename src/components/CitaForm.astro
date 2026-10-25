@@ -1,0 +1,63 @@
+---
+import { site, servicios } from "../data/site";
+const campo = "rounded-lg border border-arena bg-white px-3 py-2 font-normal";
+---
+
+<form
+    id="cita-form"
+    data-wa={site.whatsapp}
+    class="mx-auto mt-10 grid max-w-xl gap-4 rounded-xl bg-crema p-6 text-left text-carbon"
+>
+    <label class="grid gap-1 text-sm font-medium">
+        Nombre
+        <input name="nombre" required class={campo} />
+    </label>
+
+    <label class="grid gap-1 text-sm font-medium">
+        Auto (marca, modelo y año)
+        <input name="auto" required placeholder="Nissan Versa 2018" class={campo} />
+    </label>
+
+    <label class="grid gap-1 text-sm font-medium">
+        Servicio
+        <select name="servicio" class={campo}>
+            {servicios.map((s) => <option>{s.titulo}</option>)}
+            <option>Otro / no sé que tiene</option>
+        </select>
+    </label>
+
+    <label class="grid gap-1 text-sm font-medium">
+        Dia preferido (opcional)
+        <input name="dia" placeholder="Ej. jueves por la tarde" class={campo} />
+    </label>
+
+    <button
+        type="submit"
+        class="rounded-lg bg-naranja px-6 py-3 font-semibold text-white transition hover:bg-naranja-oscuro"
+    >
+        Enviar por WhatsApp
+    </button>
+</form>
+
+<script>
+    const form = document.querySelector<HTMLFormElement>("#cita-form");
+
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const d = new FormData(form);
+
+            const lineas = [
+                "Hola, quiero agendar una cita",
+                `Nombre: ${d.get("nombre")}`,
+                `Auto: ${d.get("auto")}`,
+                `Servicio: ${d.get("servicio")}`,
+            ];
+            const dia = String(d.get("dia") ?? "").trim();
+            if (dia) lineas.push(`Dia preferido: ${dia}`);
+
+            const url = `https://wa.me/${form.dataset.wa}?text=${encodeURIComponent(lineas.join("\n"))}`;
+            window.open(url, "_blank", "noopener");
+        });
+    }
+</script>

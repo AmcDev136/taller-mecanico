@@ -1,0 +1,14 @@
+---
+import ServiceCard from "./ServiceCard.astro";
+import { servicios, whatsappLink } from "../data/site";
+---
+<section id="servicios" class="bg-arena/50 py-20">
+    <div class="mx-auto max-w-5xl px-4">
+        <h2 class="text-center text-3xl font-bold">Nuestros servicios</h2>
+        <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {servicios.map((s) => (
+                <ServiceCard {...s} href={whatsappLink(`Hola, quiero cotizar: ${s.titulo}.`)} />
+            ))} 
+        </div>
+    </div>
+</section>

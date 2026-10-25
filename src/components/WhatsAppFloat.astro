@@ -1,0 +1,14 @@
+---
+import { whatsappLink } from "../data/site";
+import { MessageCircle } from "@lucide/astro";
+---
+
+<a 
+    href={whatsappLink("Hola, quiero agendar una cita.")}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Escribir por WhatsApp"
+    class="fixed bottom-4 right-4 z-20 grid h-14 w-14 place-items-center rounded-full bg-naranja text-white shadow-lg transition hover:scale-110 hover:bg-naranja-oscuro"
+>
+    <MessageCircle size={26} aria-hidden="true" />
+</a>

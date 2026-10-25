@@ -1,0 +1,59 @@
+---
+import { site, whatsappLink } from "../data/site";
+import { Menu } from "@lucide/astro";
+
+const links = [
+    { href: "#servicios", label: "Servicios" },
+    { href: "#como-funciona", label: "Cómo funciona" },
+    { href: "#ubicacion", label: "Ubicación" },
+    { href: "#contacto", label: "Contacto" },
+]
+---
+<header class="sticky top-0 z-10 border-b border-arena bg-crema/90 backdrop-blur">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+        <a href="#inicio" class="text-xl font-bold text-naranja">{site.name}</a>
+        <nav class="hidden gap-6 text-sm font-medium sm:flex">
+            {links.map((l) => <a href={l.href} class="hover:text-naranja">{l.label}</a>)}
+        </nav>
+
+        <div class="flex items-center gap-2">
+            <a 
+            href={whatsappLink("Hola, quiero agendar una cita.")}
+            class="rounded-lg bg-naranja px-4 py-2 text-sm font-semibold text-white transition hover:bg-naranja-oscuro"
+            >
+                Agendar
+            </a>
+            <button
+                id="menu-btn" type="button"
+                class="grid h-10 w-10 place-items-center rounded-lg border border-arena md:hidden"
+                aria-label="Abrir menú" aria-expanded="false"
+                aria-controls="menu-movil"
+            >
+                <Menu size={20} aria-hidden="true" />
+            </button>
+        </div>
+    </div>
+
+    <nav id="menu-movil" class="hidden border-t border-arena px-4 pb-3 md:hidden">
+        {links.map((l) => (
+            <a href={l.href} class="block py-3 font-medium hover:text-naranja">{l.label}</a>
+        ))}
+    </nav>
+</header>
+
+<script>
+    const btn = document.querySelector("#menu-btn");
+    const menu = document.querySelector("#menu-movil");
+
+    const cerrar = () => {
+        menu?.classList.add("hidden");
+        btn?.setAttribute("aria-expanded", "false");
+    };
+
+    btn?.addEventListener("click", () => {
+        const cerrado = menu?.classList.toggle("hidden");
+        btn.setAttribute("aria-expanded", String(!cerrado));
+    });
+
+    menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", cerrar));
+</script>

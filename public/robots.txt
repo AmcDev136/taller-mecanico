@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taller-mecanico.pages.dev/sitemap-index.xml

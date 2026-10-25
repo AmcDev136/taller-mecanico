@@ -1,0 +1,33 @@
+---
+import { Droplet, Disc3, Wrench, Car, BatteryCharging, Cpu } from "@lucide/astro"
+
+const iconos = {
+    aceite: Droplet,
+    frenos: Disc3,
+    afinacion: Wrench,
+    suspension: Car,
+    electrico: BatteryCharging,
+    diagnostico: Cpu,
+};
+
+interface Props {
+    icono: keyof typeof iconos;
+    titulo: string;
+    texto: string;
+    href: string;
+}
+
+const { icono, titulo, texto, href } = Astro.props;
+const Icono = iconos[icono];
+---
+<article class="flex flex-col rounded-xl border border-arena bg-white/60 p-6 transition hover:-translate-y-1 hover:shadow-lg">
+    <div class="grid h-12 w-12 place-items-center rounded-lg bg-arena text-naranja">
+        <Icono size={26} aria-hidden="true" />
+    </div>
+    <h3 class="mt-4 text-lg font-semibold">{titulo}</h3>
+    <p class="mt-1 flex-1 text-carbon/75">{texto}</p>
+    <a href={href} target="_blank" rel="noopener noreferrer" class="mt-4 text-sm font-semibold text-naranja hover:text-naranja-oscuro"
+    >
+        Cotizar por WhatsApp
+    </a>
+</article>
