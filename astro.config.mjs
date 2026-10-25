@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://taller-mecanico.pages.dev",
+  site: "https://taller-mecanico.amilcar13698.workers.dev/",
   integrations: [sitemap()],
   build: {
     inlineStylesheets: "always",

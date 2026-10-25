@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://taller-mecanico.pages.dev/sitemap-index.xml
+Sitemap: https://taller-mecanico.amilcar13698.workers.dev/sitemap-index.xml
